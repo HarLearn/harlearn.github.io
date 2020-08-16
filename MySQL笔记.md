@@ -420,3 +420,96 @@ release savepoint 保存点 -- 撤销保存点
 
 是帮助MySQL高效获取数据的数据结构
 
+- 主键索引 primary key
+  - 唯一标识，不可重复。
+- 唯一索引 unique key
+  - 避免数据重复
+- 常规索引 key / index
+  - 默认 index
+- 全文索引 full text
+
+```sql
+-- 显示 所有索引信息
+show index from 表名;
+
+-- 增加一个 全文索引
+alter table 表名 add fulltext index 索引名(指定的列);
+
+-- explain 分析 SQL 执行的状况
+explain select * from 表名;
+
+-- 给表添加索引
+create index 索引名 on 表(字段);
+
+```
+
+插入  100 万条数据
+
+```sql
+-- 插入 100 万条数据
+
+```
+
+## 索引原则
+
+- 索引不是 越多越好
+- 不要对经常变动的数据添加索引
+- 小数据的表不需要添加索引
+- 索引一般添加在经常用来查询的字段上
+
+## 权限管理
+
+用户管理，用户表 mysql 下的 user
+
+```sql
+-- 创建 用户
+create user 用户名 indentifed by 密码;
+
+-- 修改密码 当前用户密码
+set password = password(密码);
+
+-- 修改指定用户的密码
+set password for 用户名 = password(密码);
+
+-- 用户重命名
+rename user 旧用户名 to 新用户名
+
+-- 用户 授予全部的权限,除了 给别人授权
+grant all privileges on *.* to 用户;
+
+-- 查询权限
+show grants for 用户名;
+
+-- 撤销权限 撤销全部权限
+revoke all privileges on *.* from 用户名;
+
+-- 删除用户
+drop user 用户名;
+```
+
+
+
+## 数据库备份
+
+- 直接拷贝 物理文件
+
+- 在 可视化 工具中手动导出
+
+- 使用命令号 导出 ： mysqlDump 命令
+
+  ```sql
+  -- 导出
+  mysqldump -h 主机 -u 用户名 -p 密码  数据库 表名 > 物理磁盘位置/文件名
+  
+  -- 导入 登录的情况下
+  source SQL文件的位置;
+  ```
+
+## 三大范式
+
+1. 数据表中的每一列都是不可在分割的原子数据项。（列不可再分）
+2. 每张表 只做一件事
+3. 每一列和主键直接相关，不能间接相关。
+
+
+
