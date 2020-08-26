@@ -59,14 +59,14 @@ drop database `据库名`;
 
 **数值：**
 
-- tinyint 十分小的数据 1 个字节
-- smallint 较小的数据 2 个字节
-- mediumint   3个字节
-- int    4个字节
-- bigint   8个字节
-- float 浮点数 4 个字节
-- double 浮点数 8个字节
-- decimal 字符串形式的浮点数 ， 金融计算
+- `tinyint` 十分小的数据 1 个字节
+- `smallint` 较小的数据 2 个字节
+- `mediumint `  3个字节
+- `int`    4个字节
+- `bigint`   8个字节
+- `float` 浮点数 4 个字节
+- `double` 浮点数 8个字节
+- `decimal` 字符串形式的浮点数 ， 金融计算
 
 **字符串：**
 
@@ -100,7 +100,6 @@ drop database `据库名`;
 
 ```sql
 -- 创建 student 表
-
 create table if not exists `student`(
 	`id` int(4) not null auto_increment  comment '学号',
 	`name` varchar(30) not null default '匿名' comment '姓名',
@@ -133,13 +132,13 @@ show create table 表名;
 
 ## 引擎
 
-|            | MyISAM | Innodb         |
-| ---------- | ------ | -------------- |
-| 事务的支持 | N      | Y              |
-| 行锁       | N      | Y              |
-| 外键       | N      | Y              |
-| 全文索引   | Y      | N              |
-| 表空间大小 | 较小   | 较大，约为两倍 |
+|            | MyISAM | Innodb              |
+| ---------- | ------ | ------------------- |
+| 事务的支持 | N      | Y                   |
+| 行锁       | N      | Y                   |
+| 外键       | N      | Y                   |
+| 全文索引   | Y      | N(新版本好像支持了) |
+| 表空间大小 | 较小   | 较大，约为两倍      |
 
 - MyISAM：占用空间小，速度快
 - InnoDB：安全性高，事务处理，多表多用户。
@@ -316,14 +315,6 @@ select 字段 from 表名 limit 起始位置,查询的条数(页面大小);
 
 子查询 where 里面再有有一个查询
 
-```sql
--- 
-
-
-
-
-```
-
 ## 函数
 
 ```sql
@@ -440,13 +431,6 @@ explain select * from 表名;
 
 -- 给表添加索引
 create index 索引名 on 表(字段);
-
-```
-
-插入  100 万条数据
-
-```sql
--- 插入 100 万条数据
 
 ```
 
