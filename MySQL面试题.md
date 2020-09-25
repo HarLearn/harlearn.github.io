@@ -316,7 +316,6 @@ BTree是最常用的mysql数据库索引算法，也是mysql默认的算法。�
 select * from user where name like 'jack%'; 
 -- 如果一通配符开头，或者没有使用常量，则不会使用索引，例如： 
 select * from user where name like '%jack'; 
-1234
 ```
 
 **Hash算法**
@@ -365,14 +364,12 @@ CREATE TABLE user_index2 (
 	FULLTEXT KEY (information),
 	UNIQUE KEY (id_card)
 );
-12345678910
 ```
 
 第二种方式：使用ALTER TABLE命令去增加索引
 
 ```sql
 ALTER TABLE table_name ADD INDEX index_name (column_list);
-1
 ```
 
 ALTER TABLE用来创建普通索引、UNIQUE索引或PRIMARY KEY索引。
@@ -385,7 +382,6 @@ ALTER TABLE用来创建普通索引、UNIQUE索引或PRIMARY KEY索引。
 
 ```sql
 CREATE INDEX index_name ON table_name (column_list);
-1
 ```
 
 CREATE INDEX可对表增加普通索引或UNIQUE索引。（但是，不能创建PRIMARY KEY索引）
@@ -579,7 +575,7 @@ MySQL使用索引时需要索引有序，假设现在建立了"name，age，scho
 
 这里需要注意的是：Mysql 默认采用的 REPEATABLE_READ隔离级别 Oracle 默认采用的 READ_COMMITTED隔离级别
 
-事务隔离机制的实现基于锁机制和并发调度。其中并发调度使用的是MVVC（多版本并发控制），通过保存修改的旧版本信息来支持并发一致性读和回滚等特性。
+**事务隔离机制的实现基于锁机制和并发调度。其中并发调度使用的是MVVC（多版本并发控制），通过保存修改的旧版本信息来支持并发一致性读和回滚等特性。**
 
 因为隔离级别越低，事务请求的锁越少，所以大部分数据库系统的隔离级别都是**READ-COMMITTED(读取提交内容):**，但是你要知道的是InnoDB 存储引擎默认使用 **REPEATABLE-READ（可重读）**并不会有任何性能损失。
 
@@ -616,11 +612,15 @@ SERIALIZABLE 是限制性最强的隔离级别，因为该级别**锁定整个�
 
 **行级锁** 行级锁是Mysql中锁定粒度最细的一种锁，表示只针对当前操作的行进行加锁。行级锁能大大减少数据库操作的冲突。其加锁粒度最小，但加锁的开销也最大。行级锁分为共享锁 和 排他锁。
 
-特点：开销大，加锁慢；会出现死锁；锁定粒度最小，发生锁冲突的概率最低，并发度也最高。
+特点：开销大，加锁慢；会出现死锁；
+
+​            锁定粒度最小，发生锁冲突的概率最低，并发度也最高。
 
 **表级锁** 表级锁是MySQL中锁定粒度最大的一种锁，表示对当前操作的整张表加锁，它实现简单，资源消耗较少，被大部分MySQL引擎支持。最常使用的MYISAM与INNODB都支持表级锁定。表级锁定分为表共享读锁（共享锁）与表独占写锁（排他锁）。
 
-特点：开销小，加锁快；不会出现死锁；锁定粒度大，发出锁冲突的概率最高，并发度最低。
+特点：开销小，加锁快；不会出现死锁；
+
+​            锁定粒度大，发出锁冲突的概率最高，并发度最低。
 
 **页级锁** 页级锁是MySQL中锁定粒度介于行级锁和表级锁中间的一种锁。表级锁速度快，但冲突多，行级冲突少，但速度慢。所以取了折衷的页级，一次锁定相邻的一组记录。
 
@@ -963,7 +963,6 @@ select r.`*`,s.`*` from r,s
 ```sql
 -- 查询工资最高的员工是谁？ 
 select  * from employee where salary=(select max(salary) from employee);   
-12
 ```
 
 1. 子查询是多行单列的情况：结果集类似于一个数组，父查询使用：in 运算符
@@ -971,7 +970,6 @@ select  * from employee where salary=(select max(salary) from employee);
 ```sql
 -- 查询工资最高的员工是谁？ 
 select  * from employee where salary=(select max(salary) from employee);    
-12
 ```
 
 1. 子查询是多行多列的情况：结果集类似于一张虚拟表，不能用于where条件，用于select子句中做为子表
@@ -983,7 +981,6 @@ select * from dept d,  (select * from employee where join_date > '2011-1-1') e w
 
 -- 使用表连接：
 select d.*, e.* from  dept d inner join employee e on d.id = e.dept_id where e.join_date >  '2011-1-1'  
-123456
 ```
 
 ### mysql中 in 和 exists 区别
@@ -1343,7 +1340,6 @@ SQL语句优化的一些方法？
 select id from t where num is null
 -- 可以在num上设置默认值0，确保表中num列没有null值，然后这样查询：
 select id from t where num=
-123
 ```
 
 - 3.应尽量避免在 where 子句中使用!=或<>操作符，否则引擎将放弃使用索引而进行全表扫描。
