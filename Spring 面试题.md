@@ -506,7 +506,6 @@ public class StudentConfig {
         return new StudentBean();
     }
 }
-1234567
 ```
 
 ### 怎样开启注解装配？
