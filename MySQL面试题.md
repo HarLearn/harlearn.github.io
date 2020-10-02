@@ -826,9 +826,8 @@ for update 可以根据条件来完成行锁锁定，并且 id 是有索引键�
 - 全连接（FULL JOIN）
 - 交叉连接（CROSS JOIN）
 
-```
+```sql
 SELECT * FROM A,B(,C)或者SELECT * FROM A CROSS JOIN B (CROSS JOIN C)#没有任何关联条件，结果是笛卡尔积，结果集会很大，没有意义，很少使用内连接（INNER JOIN）SELECT * FROM A,B WHERE A.id=B.id或者SELECT * FROM A INNER JOIN B ON A.id=B.id多表中同时符合某种条件的数据记录的集合，INNER JOIN可以缩写为JOIN
-1
 ```
 
 内连接分为三类
@@ -844,9 +843,11 @@ SELECT * FROM A,B(,C)或者SELECT * FROM A CROSS JOIN B (CROSS JOIN C)#没有任
 
 联合查询（UNION与UNION ALL）
 
-```
-SELECT * FROM A UNION SELECT * FROM B UNION ...
-1
+```sql
+SELECT * FROM A 
+UNION 
+SELECT * FROM B 
+UNION ...
 ```
 
 - 就是把多个结果集集中在一起，UNION前的结果为基准，需要注意的是联合查询的列数要相等，相同的记录行会合并
@@ -858,9 +859,10 @@ SELECT * FROM A UNION SELECT * FROM B UNION ...
 - MySQL不支持全连接
 - 可以使用LEFT JOIN 和UNION和RIGHT JOIN联合使用
 
-```
-SELECT * FROM A LEFT JOIN B ON A.id=B.id UNIONSELECT * FROM A RIGHT JOIN B ON A.id=B.id
-1
+```sql
+SELECT * FROM A LEFT JOIN B ON A.id=B.id 
+UNION 
+SELECT * FROM A RIGHT JOIN B ON A.id=B.id
 ```
 
 表连接面试题
@@ -958,7 +960,7 @@ select  * from employee where salary=(select max(salary) from employee);
 
 ```sql
 -- 查询工资最高的员工是谁？ 
-select  * from employee where salary=(select max(salary) from employee);    
+select  * from employee where salary in (select max(salary) from employee);    
 ```
 
 1. 子查询是多行多列的情况：结果集类似于一张虚拟表，不能用于where条件，用于select子句中做为子表
@@ -1081,7 +1083,6 @@ create table tmp (
     PRIMARY KEY (id)
 ) engine = innodb
 partition by key (id) partitions 5;
-123456
 ```
 
 **type**(非常重要，可以看到有没有走索引) 访问类型
@@ -1122,7 +1123,6 @@ partition by key (id) partitions 5;
 2） ref 指的是使用普通的索引（normal index）。 
 3） range 对索引进行范围检索。 
 反例：explain表的结果，type=index，索引物理文件全扫描，速度非常慢，这个index级别比较range还低，与全表扫描是小巫见大巫。
-123456
 ```
 
 ### SQL的生命周期？
@@ -1168,7 +1168,6 @@ partition by key (id) partitions 5;
 正例：先快速定位需要获取的id段，然后再关联： 
 
 SELECT a.* FROM 表1 a, (select id from 表1 where 条件 LIMIT 100000,20 ) b where a.id=b.id
-1234567
 ```
 
 ### mysql 分页
@@ -1177,21 +1176,18 @@ LIMIT 子句可以被用于强制 SELECT 语句返回指定的记录数。LIMIT 
 
 ```
 mysql> SELECT * FROM table LIMIT 5,10; // 检索记录行 6-15 
-1
 ```
 
 为了检索从某一个偏移量到记录集的结束所有的记录行，可以指定第二个参数为 -1：
 
 ```
 mysql> SELECT * FROM table LIMIT 95,-1; // 检索记录行 96-last. 
-1
 ```
 
 如果只给定一个参数，它表示返回最大的记录行数目：
 
 ```
 mysql> SELECT * FROM table LIMIT 5; //检索前 5 个记录行 
-1
 ```
 
 换句话说，LIMIT n 等价于 LIMIT 0,n。
