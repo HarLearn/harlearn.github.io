@@ -141,9 +141,9 @@ Iterator 使用代码如下：
 
 ```Java
 List<String> list = new ArrayList<>();
-Iterator<String> it = list. iterator();
+Iterator<String> it = list.iterator();
 while(it. hasNext()){
-  String obj = it. next();
+  String obj = it.next();
   System.out.println(obj);
 }
 ```

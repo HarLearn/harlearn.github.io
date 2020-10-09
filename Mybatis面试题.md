@@ -238,7 +238,6 @@ public User selectUser(@Param("userName") String name, int @Param("deptId") dept
     select * from user
     where user_name = #{userName} and dept_id = #{deptId}
 </select>
-123456
 ```
 
 \#{}里面的名称对应的是注解@Param括号里面修饰的名称。
@@ -270,7 +269,6 @@ public User selectUser(User user);
     select * from user
     where user_name = #{userName} and dept_id = #{deptId}
 </select>
-123456
 ```
 
 \#{}里面的名称对应的是User类里面的成员属性。
@@ -318,7 +316,6 @@ foreach的主要用在构建in条件中，它可以在SQL语句中进行迭代�
         VALUES(#{emp.eName},#{emp.gender},#{emp.email},#{emp.dept.id})
     </foreach>
 </insert>
-12345678
 ```
 
 **使用ExecutorType.BATCH**
@@ -354,7 +351,6 @@ public void testBatch() throws IOException{
         openSession.close();
     }
 }
-1234567891011121314151617181920212223242526
 ```
 
 mapper和mapper.xml如下
@@ -364,7 +360,7 @@ public interface EmployeeMapper {
     //批量保存员工
     Long addEmp(Employee employee);
 }
-1234
+
 <mapper namespace="com.jourwon.mapper.EmployeeMapper"
      <!--批量保存员工 -->
     <insert id="addEmp">
@@ -372,7 +368,7 @@ public interface EmployeeMapper {
         values(#{lastName},#{email},#{gender})
     </insert>
 </mapper>
-1234567
+
 ```
 
 ### 如何获取生成的主键
@@ -385,7 +381,6 @@ public interface EmployeeMapper {
     user_name, user_password, create_time) 
     values(#{userName}, #{userPassword} , #{createTime, jdbcType= TIMESTAMP})
 </insert>
-12345
 ```
 
 parameterType 可以不写，Mybatis可以推断出传入的数据类型。如果想要访问主键，那么应当parameterType 应当是java实体或者Map。这样数据在插入之后 可以通过ava实体或者Map 来获取主键值。通过 getUserId获取主键
@@ -399,7 +394,6 @@ parameterType 可以不写，Mybatis可以推断出传入的数据类型。如�
 ```xml
 <selectKey keyColumn="id" resultType="long" keyProperty="id" order="BEFORE">
 </selectKey> 
-12
 ```
 
 | 属性          | 描述                                                         |
@@ -419,7 +413,6 @@ parameterType 可以不写，Mybatis可以推断出传入的数据类型。如�
 	user_id,user_name, user_password, create_time) 
 	values(#{userId},#{userName}, #{userPassword} , #{createTime, jdbcType= TIMESTAMP})
 </insert>
-12345678
 ```
 
 此时会将Oracle生成的主键值赋予userId变量。这个userId 就是USER对象的属性，这样就可以将生成的主键值返回了。如果仅仅是在insert语句中使用但是不返回，此时keyProperty=“任意自定义变量名”，resultType 可以不写。
@@ -439,7 +432,6 @@ order ： AFTER
 <select id="getOrder" parameterType="int" resultType="com.jourwon.pojo.Order">
        select order_id id, order_no orderno ,order_price price form orders where order_id=#{id};
 </select>
-123
 ```
 
 第2种： 通过`<resultMap>`来映射字段名和实体类属性名的一一对应的关系。
@@ -457,7 +449,6 @@ order ： AFTER
     <result property ="orderno" column ="order_no"/>
     <result property="price" column="order_price" />
 </reslutMap>
-123456789101112
 ```
 
 ### Mapper 编写有哪几种方式？
@@ -471,7 +462,6 @@ order ： AFTER
     <mapper resource="mapper.xml 文件的地址" />
     <mapper resource="mapper.xml 文件的地址" />
 </mappers>
-1234
 ```
 
 （2）定义 mapper 接口
@@ -487,7 +477,6 @@ mapper 方法中可以 this.getSqlSession()进行数据增删改查。
     <property name="sqlSessionFactory"
     ref="sqlSessionFactory"></property>
 </bean>
-1234
 ```
 
 第二种：使用 org.mybatis.spring.mapper.MapperFactoryBean：
@@ -499,7 +488,6 @@ mapper 方法中可以 this.getSqlSession()进行数据增删改查。
     <mapper resource="mapper.xml 文件的地址" />
     <mapper resource="mapper.xml 文件的地址" />
 </mappers>
-1234
 ```
 
 （2）定义 mapper 接口：
@@ -515,7 +503,6 @@ mapper 方法中可以 this.getSqlSession()进行数据增删改查。
     <property name="mapperInterface" value="mapper 接口地址" />
     <property name="sqlSessionFactory" ref="sqlSessionFactory" />
 </bean>
-1234
 ```
 
 第三种：使用 mapper 扫描器：
@@ -541,7 +528,6 @@ mapper 接口中的方法名和 mapper.xml 中的定义的 statement 的 id 保�
     <property name="sqlSessionFactoryBeanName"
     value="sqlSessionFactory"/>
 </bean>
-123456
 ```
 
 （4）使用扫描器后从 spring 容器中获取 mapper 的实现对象。
