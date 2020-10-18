@@ -208,7 +208,6 @@ Mybatis仅支持association关联对象和collection关联集合对象的延迟�
 　　<bind name="pattern" value="'%' + username + '%'" />
 　　select id,sex,age,username,password from person where username LIKE #{pattern}
 </select>
-1234
 ```
 
 ### 在mapper中如何传递多个参数
@@ -222,7 +221,6 @@ public User selectUser(String name, int deptId);
     select * from user
     where user_name = #{0} and dept_id = #{1}
 </select>
-123456
 ```
 
 \#{}里面的数字代表传入参数的顺序。
@@ -253,7 +251,6 @@ public User selectUser(Map<String, Object> params);
     select * from user
     where user_name = #{userName} and dept_id = #{deptId}
 </select>
-123456
 ```
 
 \#{}里面的名称对应的是Map里面的key名称。
@@ -307,7 +304,6 @@ foreach的主要用在构建in条件中，它可以在SQL语句中进行迭代�
         (#{emp.eName},#{emp.gender},#{emp.email},#{emp.dept.id})
     </foreach>
 </insert>
-12345678910
 <!-- 这种方式需要数据库连接属性allowMutiQueries=true的支持
  如jdbc.url=jdbc:mysql://localhost:3306/mybatis?allowMultiQueries=true -->  
 <insert id="addEmpsBatch">

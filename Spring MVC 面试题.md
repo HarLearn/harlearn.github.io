@@ -200,7 +200,6 @@ headers： 指定request中必须包含某些指定的header值，才能让该�
     <filter-name>CharacterEncodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
 </filter-mapping>
-1234567891011121314
 ```
 
 （2）get请求中文参数出现乱码解决方法有两个：
@@ -209,7 +208,6 @@ headers： 指定request中必须包含某些指定的header值，才能让该�
 
 ```xml
 <ConnectorURIEncoding="utf-8" connectionTimeout="20000" port="8080" protocol="HTTP/1.1" redirectPort="8443"/>
-1
 ```
 
 ②另外一种方法对参数进行重新编码：
@@ -265,7 +263,6 @@ ISO8859-1是tomcat默认编码，需要将tomcat编码后的内容按utf-8编码
        <bean class="com.zwp.action.MyHandlerInterceptorAdapter" />
     </mvc:interceptor>
 </mvc:interceptors>
-12345678910
 ```
 
 ### 介绍一下 WebApplicationContext
