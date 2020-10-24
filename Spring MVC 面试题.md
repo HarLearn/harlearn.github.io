@@ -143,7 +143,7 @@ headers： 指定request中必须包含某些指定的header值，才能让该�
 
 请求路径上有个id的变量值，可以通过@PathVariable来获取 @RequestMapping(value = “/page/{id}”, method = RequestMethod.GET)
 
-@RequestParam用来获得静态的URL请求入参 spring注解时action里用到。
+@RequestParam 将请求参数绑定到你控制器的方法参数上（是springmvc中接收普通参数的注解）
 
 ## 其他
 
